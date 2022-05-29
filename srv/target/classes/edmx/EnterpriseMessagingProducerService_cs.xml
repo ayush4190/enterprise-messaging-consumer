@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+  <edmx:DataServices>
+    <Schema Namespace="EnterpriseMessagingProducerService" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+      <EntityContainer Name="EntityContainer">
+        <EntitySet Name="StudentsLibraryDetails" EntityType="EnterpriseMessagingProducerService.StudentsLibraryDetails">
+          <NavigationPropertyBinding Path="texts" Target="StudentsLibraryDetails_texts"/>
+          <NavigationPropertyBinding Path="localized" Target="StudentsLibraryDetails_texts"/>
+        </EntitySet>
+        <EntitySet Name="StudentsLibraryDetails_texts" EntityType="EnterpriseMessagingProducerService.StudentsLibraryDetails_texts"/>
+      </EntityContainer>
+      <EntityType Name="StudentsLibraryDetails">
+        <Key>
+          <PropertyRef Name="ID"/>
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="firstName" Type="Edm.String" MaxLength="100"/>
+        <Property Name="lastName" Type="Edm.String" MaxLength="100"/>
+        <Property Name="currentClass" Type="Edm.String" MaxLength="10"/>
+        <Property Name="libraryNumber" Type="Edm.Int32"/>
+        <NavigationProperty Name="texts" Type="Collection(EnterpriseMessagingProducerService.StudentsLibraryDetails_texts)">
+          <OnDelete Action="Cascade"/>
+        </NavigationProperty>
+        <NavigationProperty Name="localized" Type="EnterpriseMessagingProducerService.StudentsLibraryDetails_texts">
+          <ReferentialConstraint Property="ID" ReferencedProperty="ID"/>
+        </NavigationProperty>
+      </EntityType>
+      <EntityType Name="StudentsLibraryDetails_texts">
+        <Key>
+          <PropertyRef Name="locale"/>
+          <PropertyRef Name="ID"/>
+        </Key>
+        <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="firstName" Type="Edm.String" MaxLength="100"/>
+        <Property Name="lastName" Type="Edm.String" MaxLength="100"/>
+      </EntityType>
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>
